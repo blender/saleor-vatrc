@@ -50,7 +50,6 @@ class VatReverseCharge(BasePlugin):
     )
     META_VATIN_KEY = "vatrc.vatin"
     META_VATIN_VALIDATED_KEY = "vatrc.vatin_validated"
-    META_VALIDATION_RESPONSE = "vatrc.validation_response"
 
     # This plugin depends on another plugin for calculating VAT
     VAT_PLUGIN_ID = 'mirumee.taxes.vatlayer'
@@ -116,7 +115,6 @@ class VatReverseCharge(BasePlugin):
         return address.country.code if address else ""
 
     def _parse_vatin_value(self, vatin_metadata_value: str) -> Tuple[str]:
-        print('_parse_vatin_value', vatin_metadata_value)
         try:
             vatin = vat.validate(vatin_metadata_value)
         except stdnum.exceptions.ValidationError:
@@ -150,13 +148,10 @@ class VatReverseCharge(BasePlugin):
             self.META_VATIN_VALIDATED_KEY
         )
         buyer_country = self._get_buyer_country_code(address)
-        print('_validate_vatin_value', vatin_metadata_value, buyer_country, valid_vatin_previous)  # noqa: E501
         if not vatin_metadata_value and not valid_vatin_previous:
             return False
 
-        print('_validate_vatin_value 1', vatin_metadata_value)
         vatin_country, vatin = self._parse_vatin_value(vatin_metadata_value)
-        print('_validate_vatin_value 2', vatin_country, vatin)
 
         # Does not look like a valid VATIN
         if not vatin_country or not vatin or vatin_country != buyer_country:
@@ -198,7 +193,6 @@ class VatReverseCharge(BasePlugin):
         # If a valid VATIN is provided and the sale isn't within the same country,
         # reverse-charged applies.
         if valid_vatin and seller_country_code != buyer_country_code:
-            print('calculate_checkout_total', valid_vatin)
             # VAT is reverse-charged, so it must be excluded from total.
             return self._deduct_tax(previous_value)
 
@@ -226,7 +220,6 @@ class VatReverseCharge(BasePlugin):
         # If a valid VATIN is provided and the sale isn't within the same country,
         # reverse-charged applies.
         if valid_vatin and seller_country_code != buyer_country_code:
-            print('calculate_checkout_line_total', valid_vatin, previous_value)
             # VAT is reverse-charged, so it must be excluded from line total.
             return CheckoutTaxedPricesData(
                 price_with_discounts=self._deduct_tax(

@@ -12,7 +12,7 @@ setup(
     ],
     entry_points={
         "saleor.plugins": [
-            "vatrc = vatrc.plugin:VatReverseCharge"
+            "saleor_vatrc = saleor_vatrc.plugin:VatReverseCharge"
         ]
     }
 )
