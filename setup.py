@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="saleor_vatrc",
@@ -10,6 +10,7 @@ setup(
         'python-stdnum==1.17',
         'zeep==4.1.0',
     ],
+    packages=find_packages(),
     entry_points={
         "saleor.plugins": [
             "saleor_vatrc = saleor_vatrc.plugin:VatReverseCharge"
