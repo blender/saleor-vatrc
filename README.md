@@ -14,4 +14,4 @@ into checkout metadata.
 Note that this plugin does not perform tax calculations on its own,
 instead it relies on VAT calculations done by another plugin (currently VATLayer).
 
-Read more at [https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_en.htm#withintheeu](https://europa.eu/youreurope/business/taxation/vat/)
+Read more at [https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_en.htm#withintheeu](https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_en.htm#withintheeu)
