@@ -92,6 +92,17 @@ class VatReverseCharge(BasePlugin):
         if not include_taxes_in_prices():
             return True
 
+    def _skip_price_modification(
+        self,
+        checkout_info: "CheckoutInfo",
+        previous_value: Union[
+            TaxedMoney,
+            TaxedMoneyRange,
+            Decimal,
+            CheckoutTaxedPricesData,
+            OrderTaxedPricesData,
+        ],
+    ) -> bool:
         # If there's no tax on the given prices
         if isinstance(previous_value, TaxedMoney):
             return previous_value.net == previous_value.gross
@@ -187,6 +198,9 @@ class VatReverseCharge(BasePlugin):
 
         self._validate_vatin_metadata(checkout, address)
 
+        if self._skip_price_modification(checkout_info, previous_value):
+            return previous_value
+
         valid_vatin = checkout.get_value_from_metadata(self.META_VATIN_VALIDATED_KEY)
         buyer_country_code = self._get_buyer_country_code(address)
         seller_country_code = self._get_seller_country_code()
@@ -213,6 +227,9 @@ class VatReverseCharge(BasePlugin):
         checkout = checkout_info.checkout
 
         self._validate_vatin_metadata(checkout, address)
+
+        if self._skip_price_modification(checkout_info, previous_value):
+            return previous_value
 
         valid_vatin = checkout.get_value_from_metadata(self.META_VATIN_VALIDATED_KEY)
         buyer_country_code = self._get_buyer_country_code(address)
