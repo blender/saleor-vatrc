@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="saleor_vatrc",
-    version="0.2",
+    version="0.3",
     description="Implements VAT reverse charge in Saleor",
     author="Anna Sirota",
     author_email="anna@blender.org",
