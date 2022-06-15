@@ -19,6 +19,9 @@ because this plugin already depends on Saleor's VATlayer plugin.
 Note that this plugin does not perform tax calculations on its own,
 instead it relies on VAT calculations done by another plugin (currently VATLayer).
 
+Read more at [https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_en.htm#withintheeu](https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_en.htm#withintheeu)
+
+
 ## Custom template tags
 
 This plugin is a Django app, it adds a few custom template tags to
@@ -28,15 +31,12 @@ Here are some of the tags this plugin provides:
 
  * `is_vat_applicable`: boolean indicating that VAT applies to a given order, regardless of any per-product exemptions it might contain:
 
-    {% is_vat_applicable order as vat_applies %}
+    ```{% is_vat_applicable order as vat_applies %}```
 
  * `is_vatrc_applicable`: boolean indicating that reverse charged VAT applies to a given order:
 
-    {% is_vatrc_applicable order as vatrc_applies }
+    ```{% is_vatrc_applicable order as vatrc_applies %}```
 
  * `get_value_from_metadata`: retrieves a value from metadata, useful for fetching VATIN of an order:
 
-    {% get_value_from_metadata order 'vatrc.vatin_validated' as vatin %}
-
-
-Read more at [https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_en.htm#withintheeu](https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_en.htm#withintheeu)
+    ```{% get_value_from_metadata order 'vatrc.vatin_validated' as vatin %}```
