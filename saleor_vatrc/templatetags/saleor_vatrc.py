@@ -12,19 +12,14 @@ def _get_vat_plugin():
     vat_plugin_id = saleor_vatrc.plugin.VatReverseCharge.VAT_PLUGIN_ID
     manager = get_plugins_manager()
     plugins = manager.all_plugins
-    vat_plugin = next(
-        (
-            p for p in plugins
-            if p.PLUGIN_ID == vat_plugin_id),
-        None
-    )
+    vat_plugin = next((p for p in plugins if p.PLUGIN_ID == vat_plugin_id), None)
     return vat_plugin
 
 
 @register.simple_tag(takes_context=True)
 def get_value_from_metadata(context, obj, key: str) -> bool:
     """Retrieve a value from object's metadata."""
-    return obj.get_value_from_metadata(key)
+    return obj.metadata_storage.get_value_from_metadata(key)
 
 
 @register.simple_tag(takes_context=True)

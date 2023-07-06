@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="saleor_vatrc",
-    version="0.3",
+    version="0.4",
     description="Implements VAT reverse charge in Saleor",
     author="Anna Sirota",
     author_email="anna@blender.org",
@@ -13,7 +13,7 @@ setup(
     packages=["saleor_vatrc"],
     entry_points={
         "saleor.plugins": [
-            "saleor_vatrc = saleor_vatrc.plugin:VatReverseCharge"
-        ]
-    }
+            "saleor_vatrc = saleor_vatrc.plugin:VatReverseCharge",
+        ],
+    },
 )
